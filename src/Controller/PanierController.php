@@ -9,10 +9,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Symfony\Component\HttpFoundation\Request;
+
 class PanierController extends AbstractController
 {
     #[Route('/panier', name: 'app_panier')]
-    public function index(SessionInterface $session, PhotoRepository $photo): Response
+    public function index(SessionInterface $session, PhotoRepository $photo, Request $request): Response
     {
         $panier = $session->get("panier", []);
         $dataPanier = [];
@@ -22,10 +24,13 @@ class PanierController extends AbstractController
             $img = $photo->find($id);
             $dataPanier[] = [
                 "photo"=>$img,
-                "quantite"=>$quantite
+                "quantite"=>$quantite,
+          
             ];
 
             $total += $img->getPrix() * $quantite;
+
+           
         }
 
         return $this->render('panier/index.html.twig', compact("dataPanier", "total"));
