@@ -15,6 +15,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use function PHPUnit\Framework\isNan;
+use function PHPUnit\Framework\isNull;
+
 class DashController extends AbstractController
 {
     #[Route('/dash', name: 'app_dash')]
@@ -35,7 +38,7 @@ class DashController extends AbstractController
 
 
 
-            $directory = "../img";
+            $directory = "public/img";
             $file = $form['lien']->getData();
             $file->move($directory, $file->getClientOriginalName());
             $photo->setLien($directory . '/' . $file->getClientOriginalName());
@@ -60,17 +63,17 @@ class DashController extends AbstractController
 
         );
 
-        if($search->isSubmitted() && $search->isValid()){
-            $search = $this->createQueryBuilder('p')
-            -> where('p.name');
+        //if($search->isSubmitted() && $search->isValid()){
+          //  $search = $this->createQueryBuilder('p')
+            //-> where('p.name');
             
-        }
+      //  }
 
 
         return $this->render('dash/index.html.twig', [
             'form' => $form,
             'formCat' => $formCat,
-            'search'=>$search,
+            // 'search'=>$search,
             'pagination' => $page
         ]);
 
@@ -87,4 +90,29 @@ class DashController extends AbstractController
         $entity->flush();
         return $this->redirectToRoute("app_dash");
     }
+
+    #[route('/dash/edit/{id}', name: 'app_dash_edit')]
+    public function edit(EntityManagerInterface $entity, Request $request, $id, PaginatorInterface $paginator, PhotoRepository $respository)
+    {
+        $photo = $entity->getRepository(Photo::class)->find($id);
+        $form = $this->createForm(PhotoType::class, $photo);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+   if(empty($form['lien']->getData())){
+  
+   }else{
+            $directory = "public/img";
+            $file = $form['lien']->getData();
+            $file->move($directory, $file->getClientOriginalName());
+            $photo->setLien($directory . '/' . $file->getClientOriginalName());
+   }
+            $entity->flush();
+ 
+        }
+
+        return $this->render('dash/edit.html.twig', [
+            "form" => $form,
+            "photo"=>$photo,
+   ] );
+        }
 }

@@ -19,12 +19,15 @@ class Photo
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $lien = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?categorie $categorie = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $prix = null;
 
     public function getId(): ?int
     {
@@ -78,4 +81,17 @@ class Photo
 
         return $this;
     }
+
+    public function getPrix(): ?float
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(?float $prix): static
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
 }

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DashController!
+{% endblock %}
+
+{% block body %}
+		<article class="border w-1/2 p-3">
+			<h2 class=" mt-5 mb-5 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl pb-5">Ajouter une Photo</h2>
+			{{ form_start(form, {"attr": {"class":" flex flex-col items-center"}}) }}
+			{{ form_widget(form.nom) }}
+			{{ form_widget(form.description) }}
+			{{ form_widget(form.lien) }}
+			{{ form_widget(form.categorie, {"attr": {"class":"w-[70%] text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"}}) }}
+
+			{{ form_end(form) }}
+		</article>
+{% endblock %}
