@@ -16,6 +16,7 @@ class CommentaireController extends AbstractController
         $photo = $entity->getRepository(Photo::class)->find($id);
         return $this->render('commentaire/index.html.twig', [
             'image' => $photo,
+         
         ]);
     }
 }
