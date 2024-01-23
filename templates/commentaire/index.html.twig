@@ -3,6 +3,19 @@
 {% block title %}Hello CommentaireController!{% endblock %}
 
 {% block body %}
-  
+
+
+
+<h2 class=" mt-5 mb-5 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl pb-5">{{image.nom}}</h2>
+<img class="p-8 rounded-t-lg" src="{{asset(image.lien)}}" alt="product image" />
+
+		<article class="border w-1/2 p-3 sm:rounded-lg">
+
+			{{ form_start(form, {"attr": {"class":" flex flex-col items-center"}}) }}
+			{{ form_widget(form.comm) }}
+
+
+			{{ form_end(form) }}
+		</article>
 
 {% endblock %}
