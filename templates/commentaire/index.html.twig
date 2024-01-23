@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CommentaireController!{% endblock %}
+
+{% block body %}
+    <h2 class=" mt-5 mb-5 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl pb-5">Mes commandes</h2>
+{% for photo in image %} 
+<section>
+
+  <img class="p-8 rounded-t-lg" src="{{asset(photo.lien)}}" alt="product image" />
+</section>
+
+{% endfor %}
+
+{% endblock %}

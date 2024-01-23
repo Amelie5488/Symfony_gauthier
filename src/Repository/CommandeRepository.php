@@ -21,6 +21,16 @@ class CommandeRepository extends ServiceEntityRepository
         parent::__construct($registry, Commande::class);
     }
 
+    public function paginationQuery()
+    {
+        return $this->createQueryBuilder('p')
+        
+      
+            ->orderBy('p.id', 'DESC')
+            ->getQuery()
+         ;
+    }
+
 //    /**
 //     * @return Commande[] Returns an array of Commande objects
 //     */
