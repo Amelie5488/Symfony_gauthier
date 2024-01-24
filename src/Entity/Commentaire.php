@@ -15,34 +15,35 @@ class Commentaire
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $comm = null;
+    private ?string $Comment = null;
 
     #[ORM\ManyToOne]
-    private ?user $user = null;
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getComm(): ?string
+    public function getComment(): ?string
     {
-        return $this->comm;
+        return $this->Comment;
     }
 
-    public function setComm(string $comm): static
+    public function setComment(string $Comment): static
     {
-        $this->comm = $comm;
+        $this->Comment = $Comment;
 
         return $this;
     }
 
-    public function getUser(): ?user
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(?user $user): static
+    public function setUser(?User $user): static
     {
         $this->user = $user;
 

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register
+{% endblock %}
+
+{% block body %}
+	<section class="w-full flex flex-row justify-center gap-2 p-3">
+		<article class="border w-1/2 p-3 sm:rounded-lg">
+			<h2 class=" mt-5 mb-5 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl pb-5">Créer un compte</h2>
+
+			{{ form_errors(registrationForm) }}
+
+			{{ form_start(registrationForm) }}
+			{{ form_widget(registrationForm.email) }}
+			{{ form_widget(registrationForm.nom) }}
+			{{ form_widget(registrationForm.prenom) }}
+			{{ form_widget(registrationForm.pseudo) }}
+			{{ form_widget(registrationForm.plainPassword, {
+            label: 'Password'
+        }) }}
+			{{ form_row(registrationForm.agreeTerms) }}
+
+
+			<button name="create" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Creer un compte</button>
+		</article>
+
+        <article class="border w-1/2 p-3 sm:rounded-lg flex flex-col">
+         <h2 class=" mt-5 mb-5 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl pb-5">Se connecter</h2>
+
+               {{ render(controller(
+        'App\\Controller\\LoginController::login'
+    )) }}
+            </article>
+	</section>
+	{{ form_end(registrationForm) }}
+{% endblock %}
