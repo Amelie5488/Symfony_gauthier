@@ -20,18 +20,25 @@ class CommentaireController extends AbstractController
         $form = $this->createForm(CommentaireType::class, $commentaire);
         $form->handleRequest($request);
         $photo = $entity->getRepository(Photo::class)->find($id);
-
+        $commentaire = $entity->getRepository(Commentaire::class)->findBy(['photo'=>$id]);
+        //dd($commentaire);
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $commentaire->setUser($this->getUser());
             $commentaire = $form->getData();
+
             $entity->persist($commentaire);
             $entity->flush();
+            
+            
         }
 
 
 
         return $this->render('commentaire/index.html.twig', [
             'image' => $photo,
-            'form'=>$form,
+            'form' => $form,
+            'commentaire'=> $commentaire,
         ]);
     }
 }
