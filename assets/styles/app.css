@@ -2,40 +2,171 @@
 @tailwind components;
 @tailwind utilities;
 
-#flip-card {
-    background-color: transparent;
+.box-item {
+  position: relative;
+  -webkit-backface-visibility: hidden;
+  max-width: 100%;
+}
 
-  }
-  
-  #flip-card-inner {
- 
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.6s;
-    transform-style: preserve-3d;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  }
-  
-  #flip-card:hover #flip-card-inner {
-    transform: rotateX(180deg);
-  }
-  
-  #flip-card-front, #flip-card-back {
-   
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-  }
-  
-  #flip-card-front {
+.flip-box {
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+}
 
-    color: black;
-  }
-  
-  #flip-card-back {
+.flip-box-front,
+.flip-box-back {
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  /* min-height: 475px; */
+  -ms-transition: transform 0.7s cubic-bezier(.4,.2,.2,1);
+  transition: transform 0.7s cubic-bezier(.4,.2,.2,1);
+  -webkit-transition: transform 0.7s cubic-bezier(.4,.2,.2,1);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
 
-    color: white;
-    transform: rotateX(180deg);
-  }
+.flip-box-front {
+  -ms-transform: rotateY(0deg);
+  -webkit-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+  -webkit-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.flip-box:hover .flip-box-front {
+  -ms-transform: rotateY(-180deg);
+  -webkit-transform: rotateY(-180deg);
+  transform: rotateY(-180deg);
+  -webkit-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.flip-box-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  
+  -ms-transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+  -webkit-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.flip-box:hover .flip-box-back {
+  -ms-transform: rotateY(0deg);
+  -webkit-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+  -webkit-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.flip-box .inner {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  padding: 60px;
+  outline: 1px solid transparent;
+  -webkit-perspective: inherit;
+  perspective: inherit;
+  z-index: 2;
+  
+  transform: translateY(-50%) translateZ(60px) scale(.94);
+  -webkit-transform: translateY(-50%) translateZ(60px) scale(.94);
+  -ms-transform: translateY(-50%) translateZ(60px) scale(.94);
+  top: 50%;
+}
+
+.flip-box-header {
+  font-size: 34px;
+}
+
+.flip-box p {
+  font-size: 20px;
+  line-height: 1.5em;
+}
+
+.flip-box-img {
+  margin-top: 25px;
+}
+
+.flip-box-button {
+  background-color: transparent;
+  border: 2px solid #fff;
+  border-radius: 2px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 25px;
+  padding: 15px 20px;
+  text-transform: uppercase;
+}
+
+.gallery-container {
+  display: flex;
+  justify-content: center;
+}
+
+.thumbnails {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.thumbnails img {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.scrollbar {
+  width: 1px;
+  height: 720px;
+  background: #ccc;
+  display: block;
+  margin: 0 0 0 8px;
+}
+
+.thumb {
+  width: 1px;
+  position: absolute;
+  height: 0;
+  background: #000;
+}
+
+.slides {
+  margin: 0 16px;
+  display: grid;
+  grid-auto-flow: row;
+  gap: 1rem;
+  width: calc(540px + 1rem);
+  padding: 0 0.25rem;
+  height: 720px;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+}
+
+.slides > div {
+  scroll-snap-align: start;
+}
+
+.slides img {
+  width: 540px;
+  object-fit: contain;
+}
+
+.slides::-webkit-scrollbar {
+  display: none;
+}

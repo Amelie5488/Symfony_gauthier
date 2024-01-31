@@ -4,25 +4,47 @@
 {% endblock %}
 
 {% block body %}
-
-
-	<section class="w-full flex flex-col items-center border m-3 p-3">
+<section class="">
+	<article class="flex flex-col items-center border m-3 p-3 rounded-lg">
 		<h2 class=" mt-5 mb-5 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl pb-5">{{image.nom}}</h2>
 		<img class="w-[85%] rounded " src="{{asset(image.lien)}}" alt="product image"/>
+</article>
 
+<section class="flex justify-center mb-5 ">
+	<article class="flex flex-col items-center w-1/2 border rounded-lg m-3 p-3">
 {% for commentaire in commentaire %}
-		<article>
-			<p>{{ commentaire.comment }}</p>
-		</article>
+
+		<div class=" mb-2 gap-5 w-1/2 ">
+			<h1>{{ commentaire.user.pseudo }}</h1>
+			<div class="w-full leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">{{ commentaire.comment|raw }}</div>
+		</div>
 		{% endfor %}
+</article>
+		<div class="border w-1/2 rounded-lg m-3 p-3">
 
-		<article class="border w-1/2 p-3 sm:rounded-lg">
-
-			{{ form_start(form, {"attr": {"class":" flex flex-col items-center"}}) }}
-			{{ form_widget(form.Comment) }}
-
+			{{ form_start(form, {"attr": {"class":" flex flex-col items-center", "id":"com"}}) }}
+<div class="mb-5">
+			{{ form_widget(form.Comment, {"attr":{"class":"ckeditor-classic"}}) }}
+</div>
 
 			{{ form_end(form) }}
-		</article>
+		</div>
 	</section>
+	</section>
+	<script>
+        ClassicEditor
+
+    .create( document.querySelector( '.ckeditor-classic' ) )
+    .then( newEditor => {
+        editor = newEditor;
+        editor.ui.view.editable.element.style.height = '400px';
+    } )
+    .catch( error => {
+        console.error( error );
+    } );
+	document.getElementById('commentaire_save').addEventListener('click', ()=>{
+		document.getElementById('com').submit();
+	})
+	  
+</script>
 {% endblock %}

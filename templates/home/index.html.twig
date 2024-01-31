@@ -4,58 +4,102 @@
 {% endblock %}
 
 {% block body %}
-	<section class=" relative flex items-center justify-center h-screen mb-12 overflow-hidde ">
-		<div class="w-3/4 relative z-30 p-5 text-2xl text-white bg-gray-800 opacity-50 rounded-xl">
-			<h1 class=" mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl dark:text-white ">Bienvenue sur le site GauthierPhotographeDeOuf.com</h1>
-			<p class=" w-full mb-8 text-lg font-normal text-white lg:text-xl  dark:text-gray-400  ">Bonjour,
+<!-- <section class="flex items-center justify-center mb-12 overflow-hidde ">
+				
+				<video autoplay loop muted class="w-full">
+			<source src="../img/marcassin.mp4" type="video/mp4"/>Your browser does not support the video tag.</video>
+			
+					<div class="relative w-3/4 relative z-30 p-5 text-2xl text-white bg-gray-800 opacity-50 rounded-xl">
+						<h1 class=" mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl dark:text-white ">Bienvenue sur le site GauthierPhotographeDeOuf.com</h1>
+						<p class=" w-full mb-8 text-lg font-normal text-white lg:text-xl  dark:text-gray-400  ">Bonjour,</p>
+					</br>
+					je m'appelle Gauthier et je suis photographe amateur passionné du monde animal. Prenez place et laissez-vous guider dans mon univers.
+				</br>J'ai oublié de vous dire que j'ai une soeur trop géniale je l'aime de ouf.</p></div>
+			
+			</section> -->
+
+<header id="cochon" class="relative flex items-center justify-center h-screen mb-12 overflow-hidden">
+	<div class="relative z-30 p-5 m-3 text-2xl text-white bg-gray-800 bg-opacity-50 rounded-xl">
+		<h1 class=" mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl dark:text-white ">Bienvenue sur le site GauthierPhotographeDeOuf.com<h1>
+		<p class=" w-full mb-8 text-lg font-normal text-white lg:text-xl  dark:text-gray-400  ">Bonjour,</p>
+		<p>je m'appelle Gauthier et je suis photographe amateur passionné du monde animal. Prenez place et laissez-vous guider dans mon univers.</p>
+
+		<p>J'ai oublié de vous dire que j'ai une soeur trop géniale je l'aime de ouf.</p><br>
+		<div class="flex justify-center">
+			<a href="#categorie" class="text-gray-700 border bg-gray-800 border-gray-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 ">
+				<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 384 512" class="h-8 w-8"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>
+				<span class="sr-only">Icon description</span>
+			</a>
+		</div>
+	</div>
+	<video autoplay loop muted class="absolute z-10 w-auto min-w-full min-h-full max-w-none">
+		<source src="../img/marcassin.mp4" type="video/mp4"/>
+	</video>
+</header>
+
+
+<section id="categorie" class="w-full grid grid-cols-1 lg:grid-cols-2 flex-wrap gap-2 justify-center m-3 mx-auto">
+
+	{% for categorie in cat %}
+		<div class="w-full shadow-sm grid place-items-center rounded">
+			<article
+				class="flex box-item mt-5">
+
+				<div class="flip-box w-[640px] text-[120px]">
+					<div class="w-full h-auto p-5 flip-box-back" id="">
+						<a href="{{ path('app_photo',{id:categorie.id}) }}">
+							<h5 class="rounded" style="background-image: url({{asset(categorie.image)}}); background-size: 100%; background-position: 30% 20%; text-align: center; font-weight: bold; text-transform: uppercase; font-family: 'Steelfish Rg', 'helvetica neue', helvetica, arial, sans-serif font-weight: 800">{{ categorie.nom }}</h5>
+						</a>
+
+					</div>
+
+					<div class="w-full h-auto p-5 flip-box-front">
+						<a href="{{ path('app_photo',{id:categorie.id}) }}">
+							<h5 class="" style="background-image: url({{asset(categorie.image)}}); background-repeat: repeat; background-position: center; -webkit-background-clip: text;-webkit-text-fill-color: transparent; font-size: 120px; text-align: center; font-weight: bold; text-transform: uppercase; font-family: 'Steelfish Rg', 'helvetica neue', helvetica, arial, sans-serif font-weight: 800; -webkit-font-smoothing: antialiased;">{{ categorie.nom }}</h5>
+						</a>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</article>
+{% endfor %}</section><script>// const nav = document.querySelector("#cochon");
+		// const cat = document.querySelector("#categorie");
+		// const navHeight = 70;
+		// // the point the scroll starts from (in px)
+		// let lastScrollY = 0;
+		// // how far to scroll (in px) before triggering
+		// const delta = 100;
 		
-	</br>
-	je m'appelle Gauthier et je suis photographe amateur passionné du monde animal. Prenez place et laissez-vous guider dans mon univers.
-</br>J'ai oublié de vous dire que j'ai une soeur trop géniale je l'aime de ouf.</p>
-</div>
-<video autoplay loop muted class="absolute z-10 w-auto min-w-full min-h-full ">
-    <source src="../img/marcassin.mp4" type="video/mp4"/>Your browser does not support the video tag.
-    </video>
-    </section>
-
-
-    <section class="w-full flex flex-wrap gap-8 justify-center m-3" id="flip-card">
-        
-        {% for categorie in cat %}
-    
-    <article class="w-full flex rounded shadow-lg" id="flip-card-inner">
-
-<!-- <div class="h-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-	    <a class="" href="{{ path('app_photo',{id:categorie.id}) }}">
-	        <img class="object-cover h-64 w-full rounded-t-lg" src="{{categorie.image}}" alt="" />
-	    </a> -->
-
-	<div class="w-full h-auto p-5" id="flip-card-front">
-		<a href="{{ path('app_photo',{id:categorie.id}) }}">
-			<h5 style="background-image: url({{asset(categorie.image)}}); background-size: 100%; background-position: 30% 20%; font-size: 120px; text-align: center; font-weight: bold; text-transform: uppercase; font-family: 'Steelfish Rg', 'helvetica neue', helvetica, arial, sans-serif font-weight: 800">{{ categorie.nom }}</h5>
-		</a>
-
-		<!-- <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ categorie.decsription }}</p> -->
-
-		<!-- <a href="{{ path('app_photo',{id:categorie.id}) }}" class="bottom-0 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-					            Read more
-					             <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-					                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-					            </svg>
-					        </a>  -->
-
-
-</div>
-
-
-    	<div class="w-full h-auto p-5" id="flip-card-back">
-		<a href="{{ path('app_photo',{id:categorie.id}) }}">
-			<h5 style="background-image: url({{asset(categorie.image)}}); background-repeat: repeat; background-position: center; -webkit-background-clip: text;-webkit-text-fill-color: transparent; font-size: 120px; text-align: center; font-weight: bold; text-transform: uppercase; font-family: 'Steelfish Rg', 'helvetica neue', helvetica, arial, sans-serif font-weight: 800; -webkit-font-smoothing: antialiased;">{{ categorie.nom }}</h5>
-		</a>
-
-</div>
-</div>
-</article>
-{% endfor %}
-</section>
-{% endblock %}
+		// // function to run on scrolling
+		// function scrolled() {
+		// let sy = window.scrollY;
+		// // only trigger if scrolled more than delta
+		// if (Math.abs(lastScrollY - sy) > delta) {
+		//     // scroll down -> hide nav bar
+		//     if (sy > lastScrollY && sy > navHeight) {
+		//       nav.classList.add("-top-[850px]");
+		
+		//     }
+		//     // scroll up -> show nav bar
+		//     else if (sy < lastScrollY) {
+		//       nav.classList.remove("-top-[850px]");
+		//     }
+		//    // update current scroll point
+		//    lastScrollY = sy
+		// }
+		// }
+		
+		// // Add event listener & debounce so not constantly checking for scroll
+		// let didScroll = false;
+		// window.addEventListener("scroll", function(e){
+		// didScroll = true;
+		// });
+		
+		// setInterval(function() {
+		// if (didScroll) {
+		//     scrolled();
+		//     didScroll = false;
+		//    }
+		// }, 250)</script>{% endblock %}
