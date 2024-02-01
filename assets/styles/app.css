@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+  background-color: #001212;
+
+}
+
+nav{
+  background-color: #001212;
+ 
+
+}
+
+a{
+color: #737F78 ;
+border-color: #737F78;
+}
+
+footer{
+  background-color:#001212 ;
+
+}
+
 .box-item {
   position: relative;
   -webkit-backface-visibility: hidden;
