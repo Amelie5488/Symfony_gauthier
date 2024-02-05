@@ -6,7 +6,7 @@
 
 
 
-<section class="grid grid-cols-2 md:grid-cols-3 place-items-center gap-6 m-8">
+<section class="grid grid-cols-1 md:grid-cols-3 place-items-center gap-6 m-8">
     {% for photo in image %} 
 <div class="w-full h-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-4 flex flex-col justify-between divide-y divide-gray-200 mb-4">
     <a href="{{ path('app_commentaire', {id:photo.id, slug:photo.slug}) }}">

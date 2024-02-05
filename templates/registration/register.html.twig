@@ -4,8 +4,8 @@
 {% endblock %}
 
 {% block body %}
-	<section class="w-full flex flex-row justify-center gap-2 p-3">
-		<article class="border w-1/2 p-3 sm:rounded-lg ">
+	<section class="w-full flex flex-col md:flex-row justify-center  gap-2 p-3 mt-5">
+		<article class="border w-full md:w-1/2 p-3 sm:rounded-lg ">
 			<h2 class=" mt-5 mb-5 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl pb-5">Créer un compte</h2>
 
 			{{ form_errors(registrationForm) }}
@@ -27,7 +27,7 @@
 	
 	{{ form_end(registrationForm) }}
 
-            <article class="border w-1/2 p-3 sm:rounded-lg flex flex-col">
+            <article class="border w-full md:w-1/2 p-3 sm:rounded-lg flex flex-col">
          <h2 class=" mt-5 mb-5 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl pb-5">Se connecter</h2>
 
                {{ render(controller(

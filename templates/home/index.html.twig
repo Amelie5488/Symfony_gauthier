@@ -38,68 +38,40 @@
 </header>
 
 
-<section id="categorie" class="w-full grid grid-cols-1 lg:grid-cols-3 flex-wrap gap-2 justify-center m-3 mx-auto">
+<section id="categorie" class="w-full grid grid-cols-1 2xl:grid-cols-2  flex-wrap gap-2 justify-center m-3 mx-auto">
 
 	{% for categorie in cat %}
 		<div class="w-full shadow-sm grid place-items-center rounded">
 			<article
 				class="flex box-item mt-5">
+	<div class="w-full h-auto p-5 flip-box-front">
+						<a href="{{ path('app_photo',{id:categorie.id}) }}">
+							<h5 class="animated animatedFadeInUp fadeInUp" style="color: transparent;
+-webkit-background-clip: text;
+-moz-background-clip: text;
+background-clip: text;
+text-shadow: 0px 0px 0px rgba(255,255,255,0.3); font-size: 120px; text-align: center; font-weight: bold; text-transform: uppercase; font-family: 'Steelfish Rg', 'helvetica neue', helvetica, arial, sans-serif font-weight: 800; -webkit-font-smoothing: antialiased;">{{ categorie.nom }}</h5>
+						</a>
 
-				<div class="flip-box w-[640px] text-[120px]">
+					</div>
+
+				<div class="flip-box w-[900px] md:w-[800px] lg:w-[900px] text-[120px]">
 					<div class="w-full h-auto p-5 flip-box-back" id="">
 						<a href="{{ path('app_photo',{id:categorie.id}) }}">
-							<h5 class="rounded" style="background-image: url({{asset(categorie.image)}}); background-size: 100%; background-position: 30% 20%; text-align: center; font-weight: bold; text-transform: uppercase; font-family: 'Steelfish Rg', 'helvetica neue', helvetica, arial, sans-serif font-weight: 800">{{ categorie.nom }}</h5>
+							<h5 class=" text-transparent rounded-full" style="background-image: url({{asset(categorie.image)}});background-position: center; background-size: 100%; ; text-align: center; font-weight: bold; text-transform: uppercase; font-family: 'Steelfish Rg', 'helvetica neue', helvetica, arial, sans-serif font-weight: 800">{{ categorie.nom }}</h5>
 						</a>
 
 					</div>
 
-					<div class="w-full h-auto p-5 flip-box-front">
-						<a href="{{ path('app_photo',{id:categorie.id}) }}">
-							<h5 class="" style="background-image: url({{asset(categorie.image)}}); background-repeat: repeat; background-position: center; -webkit-background-clip: text;-webkit-text-fill-color: transparent; font-size: 120px; text-align: center; font-weight: bold; text-transform: uppercase; font-family: 'Steelfish Rg', 'helvetica neue', helvetica, arial, sans-serif font-weight: 800; -webkit-font-smoothing: antialiased;">{{ categorie.nom }}</h5>
-						</a>
-
-					</div>
+				
 				</div>
 			</div>
 
 		</div>
 	</article>
-{% endfor %}</section><script>// const nav = document.querySelector("#cochon");
-		// const cat = document.querySelector("#categorie");
-		// const navHeight = 70;
-		// // the point the scroll starts from (in px)
-		// let lastScrollY = 0;
-		// // how far to scroll (in px) before triggering
-		// const delta = 100;
-		
-		// // function to run on scrolling
-		// function scrolled() {
-		// let sy = window.scrollY;
-		// // only trigger if scrolled more than delta
-		// if (Math.abs(lastScrollY - sy) > delta) {
-		//     // scroll down -> hide nav bar
-		//     if (sy > lastScrollY && sy > navHeight) {
-		//       nav.classList.add("-top-[850px]");
-		
-		//     }
-		//     // scroll up -> show nav bar
-		//     else if (sy < lastScrollY) {
-		//       nav.classList.remove("-top-[850px]");
-		//     }
-		//    // update current scroll point
-		//    lastScrollY = sy
-		// }
-		// }
-		
-		// // Add event listener & debounce so not constantly checking for scroll
-		// let didScroll = false;
-		// window.addEventListener("scroll", function(e){
-		// didScroll = true;
-		// });
-		
-		// setInterval(function() {
-		// if (didScroll) {
-		//     scrolled();
-		//     didScroll = false;
-		//    }
-		// }, 250)</script>{% endblock %}
+{% endfor %}</section><script>
+	
+	
+
+	
+</script>{% endblock %}
