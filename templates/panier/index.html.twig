@@ -3,9 +3,9 @@
 {% block title %}Hello PanierController!
 {% endblock %}
 
-{% block body %}
-	<section class="w-full flex flex-col justify-center gap-2 p-3">
-		<article class="border w-full p-3">
+{% block body %} 
+	<section class="w-full flex flex-col justify-center gap-2 p-3 ">
+		<article class="border w-full p-3 rounded-lg">
 			<h2 class=" mt-5 mb-5 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl pb-5">Mon Panier</h2>
 
 
@@ -23,11 +23,11 @@
 					<tbody class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
 						{% for element in dataPanier %}
 							<tr scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-								<td class="px-6 py-4">{{ element.photo.nom }}</td>
-								<td class="px-6 py-4">{{ element.photo.prix }}</td>
-								<td class="px-6 py-4">{{element.quantite }}</td>
-								<td class="px-6 py-4">{{ element.quantite * element.photo.prix }}</td>
-								<td class="px-6 py-4">
+								<td class="px-6 py-4 bg-white">{{ element.photo.nom }}</td>
+								<td class="px-6 py-4 ">{{ element.photo.prix }}</td>
+								<td class="px-6 py-4 bg-white">{{element.quantite }}</td>
+								<td class="px-6 py-4 bg-white">{{ element.quantite * element.photo.prix }}</td>
+								<td class="px-6 py-4 bg-white">
 									<a href="{{ path('app_panier_add', {id:element.photo.id}) }}" class="text-white bg-green-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
 										<svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewbox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
 										<span class="sr-only">Icon description</span>
@@ -62,7 +62,7 @@
 				</table>
 			</article>
 
-			<a href="{{ path('app_stripe') }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+			<a href="{{ path('app_stripe') }}" class="w-32 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
 
 				Valider mon panier
 

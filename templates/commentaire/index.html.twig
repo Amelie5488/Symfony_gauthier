@@ -5,13 +5,13 @@
 
 {% block body %}
 	<section class="">
-		<article class="flex flex-col items-center border m-3 p-3 rounded-lg">
-			<h2 class=" mt-5 mb-5 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl pb-5">{{image.nom}}</h2>
+		<article class="flex flex-col items-center border border-gray-500 m-3 p-3 rounded-lg">
+			<h2 class=" mt-5 mb-5 text-3xl font-extrabold text-gray-500 dark:text-white md:text-5xl lg:text-6xl pb-5">{{image.nom}}</h2>
 			<img class="w-[85%] rounded " src="{{asset(image.lien)}}" alt="product image"/>
 		</article>
 
 		<section class="flex flex-col lg:flex-row justify-center mb-5 ">
-			<article class="flex flex-col items-center md:mr-3 lg:w-1/2 border rounded-lg m-3 p-3">
+			<article class="flex flex-col items-center md:mr-3 lg:w-1/2 border border-gray-500 rounded-lg m-3 p-3">
 				{% for commentaire in commentaire %}
 
 					<div class=" mb-2 gap-5 w-full lg:w-1/2">
@@ -20,7 +20,7 @@
 					</div>
 				{% endfor %}
 			</article>
-			<div class="border lg:w-1/2 rounded-lg m-3 p-3">
+			<div class="border border-gray-500 lg:w-1/2 rounded-lg m-3 p-3">
 
 				{{ form_start(form, {"attr": {"class":" flex flex-col items-center", "id":"com"}}) }}
 				<div class="mb-5 w-full">

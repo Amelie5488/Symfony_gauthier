@@ -4,14 +4,14 @@
 {% endblock %}
 
 {% block body %}
-	<section class="w-full flex flex-col md:flex-row justify-center  gap-2 p-3 mt-5">
+	<section class="w-full flex flex-col md:flex-row justify-center gap-2 p-3 mt-5">
 		<article class="border w-full md:w-1/2 p-3 sm:rounded-lg ">
 			<h2 class=" mt-5 mb-5 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl pb-5">Créer un compte</h2>
 
 			{{ form_errors(registrationForm) }}
 
-			{{ form_start(registrationForm) }}
-			{{ form_widget(registrationForm.email) }}
+			{{ form_start(registrationForm)}}
+			{{ form_widget(registrationForm.email)}}
 			{{ form_widget(registrationForm.nom) }}
 			{{ form_widget(registrationForm.prenom) }}
 			{{ form_widget(registrationForm.pseudo) }}
