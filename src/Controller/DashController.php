@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Categorie;
+use App\Entity\Commande;
 use App\Entity\Photo;
 use App\Form\CategorieType;
 use App\Form\PhotoType;
 use App\Form\SearchType;
+use App\Repository\CommandeRepository;
 use App\Repository\PhotoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -14,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 
 use function PHPUnit\Framework\isNan;
 use function PHPUnit\Framework\isNull;
@@ -21,8 +24,9 @@ use function PHPUnit\Framework\isNull;
 class DashController extends AbstractController
 {
     #[Route('/dash', name: 'app_dash')]
-    public function index(PhotoRepository $respository, Request $request, EntityManagerInterface $entity, PaginatorInterface $paginator): Response
+    public function index(CommandeRepository $commande, PhotoRepository $respository, Request $request, EntityManagerInterface $entity, PaginatorInterface $paginator): Response
     {
+        $commande = $entity->getRepository(Commande::class)->findAll();
         $photo = new Photo();
         $form = $this->createForm(PhotoType::class, $photo);
         $search = $this->createForm(SearchType::class);
@@ -30,7 +34,7 @@ class DashController extends AbstractController
         $cat = new Categorie();
         $formCat = $this->createForm(CategorieType::class, $cat);
         $formCat->handleRequest($request);
-
+        $slugger = new AsciiSlugger();
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -42,7 +46,7 @@ class DashController extends AbstractController
             $file = $form['lien']->getData();
             $file->move($directory, $file->getClientOriginalName());
             $photo->setLien($directory . '/' . $file->getClientOriginalName());
-
+            $photo->setSlug($slugger->slug($form['nom']->getData()));
             $entity->persist($photo);
             $entity->flush();
         }
@@ -53,6 +57,8 @@ class DashController extends AbstractController
             $entity->persist($cat);
             $entity->flush();
         }
+
+
 
 
         // dd($photo);
@@ -74,7 +80,9 @@ class DashController extends AbstractController
             'form' => $form,
             'formCat' => $formCat,
             // 'search'=>$search,
-            'pagination' => $page
+            'pagination' => $page,
+            'commande'=>$commande,
+       
         ]);
 
 

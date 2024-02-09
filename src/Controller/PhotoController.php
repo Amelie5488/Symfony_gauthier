@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PhotoController extends AbstractController
 {
-    #[Route('/photo{id}', name: 'app_photo')]
+    #[Route('/photo/{id}', name: 'app_photo')]
     public function index(EntityManagerInterface $entity, $id): Response
     {
         $photo = $entity ->getRepository(Photo::class)->findBy(["categorie" => $id]);

@@ -1,40 +1,80 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Hello HomeController!
+{% endblock %}
 
 {% block body %}
+<!-- <section class="flex items-center justify-center mb-12 overflow-hidde ">
+				
+				<video autoplay loop muted class="w-full">
+			<source src="../img/marcassin.mp4" type="video/mp4"/>Your browser does not support the video tag.</video>
+			
+					<div class="relative w-3/4 relative z-30 p-5 text-2xl text-white bg-gray-800 opacity-50 rounded-xl">
+						<h1 class=" mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl dark:text-white ">Bienvenue sur le site GauthierPhotographeDeOuf.com</h1>
+						<p class=" w-full mb-8 text-lg font-normal text-white lg:text-xl  dark:text-gray-400  ">Bonjour,</p>
+					</br>
+					je m'appelle Gauthier et je suis photographe amateur passionné du monde animal. Prenez place et laissez-vous guider dans mon univers.
+				</br>J'ai oublié de vous dire que j'ai une soeur trop géniale je l'aime de ouf.</p></div>
+			
+			</section> -->
+
+<header id="" class="cochon relative flex items-center justify-center h-screen mb-12 overflow-hidden">
+	<div class="relative z-30 p-5 m-3 text-2xl text-white bg-gray-800 bg-opacity-50 rounded-xl">
+		<h1 class=" mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl dark:text-white ">Bienvenue sur le site GauthierPhotographeDeOuf.com<h1>
+		<p class=" w-full mb-8 text-lg font-normal text-white lg:text-xl  dark:text-gray-400  ">Bonjour,</p>
+		<p>je m'appelle Gauthier et je suis photographe amateur passionné du monde animal. Prenez place et laissez-vous guider dans mon univers.</p>
+
+		<p>J'ai oublié de vous dire que j'ai une soeur trop géniale je l'aime de ouf.</p><br>
+		<div class="flex justify-center">
+			<a href="#categorie" class="text-gray-700 border bg-gray-800 border-gray-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 ">
+				<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 384 512" class="h-8 w-8"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>
+				<span class="sr-only">Icon description</span>
+			</a>
+		</div>
+	</div>
+	<video autoplay loop muted class="absolute z-10 w-auto min-w-full min-h-full max-w-none">
+		<source src="../img/marcassin.mp4" type="video/mp4"/>
+	</video>
+</header>
 
 
+<section id="" class="categorie w-full grid grid-cols-1 2xl:grid-cols-2  flex-wrap gap-2 justify-center m-3 mx-auto">
 
-<section class="w-full flex flex-wrap gap-8 justify-center m-3">
-    {% for categorie in cat %}
-    <article class="h-auto flex ">
+	{% for categorie in cat %}
+		<div class="w-full shadow-sm grid place-items-center rounded">
+			<article
+				class="flex box-item mt-5">
+	<div class="w-full h-auto p-5 flip-box-front">
+						<a href="{{ path('app_photo',{id:categorie.id}) }}">
+							<h5 class="animated animatedFadeInUp fadeInUp" style="color: transparent;
+-webkit-background-clip: text;
+-moz-background-clip: text;
+background-clip: text;
+text-shadow: 0px 0px 0px rgba(255,255,255,0.3); font-size: 120px; text-align: center; font-weight: bold; text-transform: uppercase; font-family: 'Steelfish Rg', 'helvetica neue', helvetica, arial, sans-serif font-weight: 800; -webkit-font-smoothing: antialiased;">{{ categorie.nom }}</h5>
+						</a>
 
-<div class="h-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-    <a class="" href="{{ path('app_photo',{id:categorie.id}) }}">
-        <img class="object-cover h-64 w-full rounded-t-lg" src="{{categorie.image}}" alt="" />
-    </a>
-    <div class="h-auto p-5">
-        <a href="{{ path('app_photo',{id:categorie.id}) }}">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ categorie.nom }}</h5>
-        </a>
-      
-        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ categorie.decsription }}</p>
-        
-        <a href="{{ path('app_photo',{id:categorie.id}) }}" class="bottom-0 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Read more
-             <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-            </svg>
-        </a>
-   
-    </div>
-</div>
-</article>
+					</div>
+
+				<div class="flip-box w-[900px] md:w-[800px] lg:w-[900px] text-[120px]">
+					<div class="w-full h-auto p-5 flip-box-back" id="">
+						<a href="{{ path('app_photo',{id:categorie.id}) }}">
+							<h5 class=" text-transparent rounded-full" style="background-image: url({{asset(categorie.image)}});background-position: center; background-size: 100%; ; text-align: center; font-weight: bold; text-transform: uppercase; font-family: 'Steelfish Rg', 'helvetica neue', helvetica, arial, sans-serif font-weight: 800">{{ categorie.nom }}</h5>
+						</a>
+
+					</div>
+
+				
+				</div>
+			</div>
+
+		</div>
+	</article>
 {% endfor %}
 </section>
 
-{% endblock %}
+<script>
+	
+	
 
-
-
+	
+</script>{% endblock %}
