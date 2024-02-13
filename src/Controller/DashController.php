@@ -53,7 +53,13 @@ class DashController extends AbstractController
 
         if ($formCat->isSubmitted() && $formCat->isValid()) {
 
-            $cat = $formCat->getData();
+          
+            $directory = "public/img";
+            $file = $formCat['image']->getData();
+            $file->move($directory, $file->getClientOriginalName());
+            $cat->setImage($directory . '/' . $file->getClientOriginalName());
+            $cat->setSlug($slugger->slug($formCat['nom']->getData()));
+          
             $entity->persist($cat);
             $entity->flush();
         }
