@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Commentaire;
 use App\Entity\Photo;
 use App\Form\CommentaireType;
+use App\Repository\CommentaireRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,6 +14,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CommentaireController extends AbstractController
 {
+
+    public function __construct(readonly private CommentaireRepository $commentaireRepository)
+    {
+        
+    }
     #[Route('/commentaire/{id}-{slug}', name: 'app_commentaire')]
     public function index(EntityManagerInterface $entity, $id, Request $request): Response
     {
@@ -20,7 +26,7 @@ class CommentaireController extends AbstractController
         $form = $this->createForm(CommentaireType::class, $commentaire);
         $form->handleRequest($request);
         $photo = $entity->getRepository(Photo::class)->find($id);
-        $commentaires = $entity->getRepository(Commentaire::class)->findBy(['photo' => $id]);
+        $commentaires = $this->commentaireRepository->findBy(['photo' => $id]);
         //dd($commentaire);
         if ($form->isSubmitted() && $form->isValid()) {
 

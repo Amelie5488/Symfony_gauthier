@@ -4,12 +4,15 @@ namespace App\Controller;
 
 use App\Entity\Categorie;
 use App\Entity\Commande;
+use App\Entity\Commentaire;
 use App\Entity\Photo;
 use App\Form\CategorieType;
 use App\Form\PhotoType;
 use App\Form\SearchType;
 use App\Repository\CommandeRepository;
+use App\Repository\CommentaireRepository;
 use App\Repository\PhotoRepository;
+use App\Service\AlertServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,17 +26,39 @@ use function PHPUnit\Framework\isNull;
 
 class DashController extends AbstractController
 {
-    #[Route('/dash', name: 'app_dash')]
-    public function index(CommandeRepository $commande, PhotoRepository $respository, Request $request, EntityManagerInterface $entity, PaginatorInterface $paginator): Response
+
+    public function __construct(
+    readonly private AlertServiceInterface $alertService,
+    readonly private CommandeRepository $commande,
+    readonly private PhotoRepository $respository,
+    readonly private EntityManagerInterface $entity,
+    readonly private CommentaireRepository $commentaireRepository,
+    )
     {
-        $commande = $entity->getRepository(Commande::class)->findAll();
+        
+    }
+    #[Route('/dash', name: 'app_dash')]
+    public function index( Request $request, PaginatorInterface $paginator): Response
+    {
+        $commande = $this->entity->getRepository(Commande::class)->findAll();
+        //$commentaire = $entity->getRepository(Commentaire::class)->findAll();
+       $commentaire = $this->commentaireRepository->findAll();
+
+       
         $photo = new Photo();
+        
         $form = $this->createForm(PhotoType::class, $photo);
+        
         $search = $this->createForm(SearchType::class);
+       
         $form->handleRequest($request);
+       
         $cat = new Categorie();
+       
         $formCat = $this->createForm(CategorieType::class, $cat);
+       
         $formCat->handleRequest($request);
+        
         $slugger = new AsciiSlugger();
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -43,25 +68,39 @@ class DashController extends AbstractController
 
 
             $directory = "public/img";
+            
             $file = $form['lien']->getData();
             $file->move($directory, $file->getClientOriginalName());
+           
             $photo->setLien($directory . '/' . $file->getClientOriginalName());
             $photo->setSlug($slugger->slug($form['nom']->getData()));
-            $entity->persist($photo);
-            $entity->flush();
+            
+            $this->entity->persist($photo);
+            $this->entity->flush();
+            
+            $this->alertService->success("c'est OK c'est bam c'est bim");
+            return $this->redirectToRoute("app_dash");
         }
 
         if ($formCat->isSubmitted() && $formCat->isValid()) {
 
           
             $directory = "public/img";
+            
             $file = $formCat['image']->getData();
             $file->move($directory, $file->getClientOriginalName());
+            
             $cat->setImage($directory . '/' . $file->getClientOriginalName());
             $cat->setSlug($slugger->slug($formCat['nom']->getData()));
-          
-            $entity->persist($cat);
-            $entity->flush();
+            
+            $this->alertService->success("Bien ajouté");
+
+            $this->entity->persist($cat);
+            $this->entity->flush();
+
+            $this->alertService->success("c'est OK c'est bam c'est bim");
+            return $this->redirectToRoute("app_dash");
+
         }
 
 
@@ -69,10 +108,9 @@ class DashController extends AbstractController
 
         // dd($photo);
         $page = $paginator->paginate(
-            $respository->paginationQuery(),
+            $this->respository->paginationQuery(),
             $request->query->get('page', 1),
             5
-
         );
 
         //if($search->isSubmitted() && $search->isValid()){
@@ -88,6 +126,7 @@ class DashController extends AbstractController
             // 'search'=>$search,
             'pagination' => $page,
             'commande'=>$commande,
+            'commentaire'=>$commentaire,
        
         ]);
 
