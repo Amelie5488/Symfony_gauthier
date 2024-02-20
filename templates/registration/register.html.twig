@@ -4,13 +4,13 @@
 {% endblock %}
 
 {% block body %}
-	<section class="w-full flex flex-col md:flex-row justify-center gap-2 p-3 mt-5">
-		<article class="border w-full md:w-1/2 p-3 sm:rounded-lg ">
-			<h2 class=" mt-5 mb-5 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl pb-5">Créer un compte</h2>
+	<section class="w-full flex flex-col md:flex-row justify-center gap-2 p-3 mt-5 ">
+		<article class="w-full md:w-1/2 p-3 flex flex-col items-center">
+			<h2 class=" mt-5 mb-5 text-3xl font-extrabold text-gray-400 dark:text-white md:text-5xl lg:text-6xl pb-5">Créer un compte</h2>
 
 			{{ form_errors(registrationForm) }}
 
-			{{ form_start(registrationForm)}}
+			{{ form_start(registrationForm, {"attr" : {"class":"flex flex-col items-center w-full gap-5"}})}}
 			{{ form_widget(registrationForm.email)}}
 			{{ form_widget(registrationForm.nom) }}
 			{{ form_widget(registrationForm.prenom) }}
@@ -21,14 +21,14 @@
 			{{ form_row(registrationForm.agreeTerms) }}
 
 
-			<button name="create" type="submit" class="w-[70%] text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Creer un compte</button>
+			<button name="create" type="submit" class="w-[70%] text-white bg-green-900 hover:bg-green-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Creer un compte</button>
 		</article>
 
 	
 	{{ form_end(registrationForm) }}
 
-            <article class="border w-full md:w-1/2 p-3 sm:rounded-lg flex flex-col">
-         <h2 class=" mt-5 mb-5 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl pb-5">Se connecter</h2>
+            <article class="w-full md:w-1/2 p-3  flex flex-col items-center">
+         <h2 class=" mt-5 mb-5 text-3xl font-extrabold text-gray-400 dark:text-white md:text-5xl lg:text-6xl pb-5">Se connecter</h2>
 
                 {{ render(controller(
         'App\\Controller\\LoginController::login'

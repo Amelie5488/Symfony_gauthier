@@ -5,13 +5,14 @@
 
 {% block body %}
 
-	<section class="w-full flex flex-row justify-center gap-2 p-3 ">
-		<article class="border w-1/2 p-3 sm:rounded-lg">
-			<h2 class=" mt-5 mb-5 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl pb-5">Ajouter une Photo</h2>
-			{{ form_start(form, {"attr": {"class":" flex flex-col items-center"}}) }}
+	<section class="w-full flex flex-col md:flex-row justify-center gap-2  ">
+		<article class="w-full lg:w-1/2 p-3 ">
+			<h2 class=" mt-5 mb-5 text-3xl font-extrabold text-gray-400 dark:text-white md:text-5xl lg:text-6xl pb-5">Ajouter une Photo</h2>
+			{{ form_start(form, {"attr": {"class":" flex flex-col items-center gap-5"}}) }}
 			{{ form_widget(form.nom) }}
 			{{ form_widget(form.description) }}
 			{{ form_widget(form.lien) }}
+			{{ form_widget(form.prix) }}
 			{{ form_widget(form.categorie, {"attr": {"class":"w-[70%] text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"}}) }}
 
 			{{ form_end(form) }}
@@ -30,9 +31,9 @@
 
 {% endfor %}
 		</article>
-		<article class="border w-1/2 p-3 sm:rounded-lg">
-			<h2 class=" mt-5 mb-5 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl pb-5">Ajouter une catégorie</h2>
-			{{ form_start(formCat, {"attr": {"class":" flex flex-col items-center"}}) }}
+		<article class="w-full lg:w-1/2 p-3 sm:rounded-lg">
+			<h2 class=" mt-5 mb-5 text-3xl font-extrabold text-gray-400 dark:text-white md:text-5xl lg:text-6xl pb-5">Ajouter une catégorie</h2>
+			{{ form_start(formCat, {"attr": {"class":" flex flex-col items-center gap-5"}}) }}
 			{{ form_widget(formCat.nom) }}
 			{{ form_widget(formCat.decsription) }}
 			{{ form_widget(formCat.image) }}
@@ -54,12 +55,12 @@
 		</article>
 	</section>
 
- 
-	<section class="border relative overflow-x-auto shadow-md sm:rounded-lg p-3 mt-5 mb-5 m-3">
+ <hr class="w-[700px] h-1 mx-auto my-4 bg-gray-100/50 border-0 rounded md:my-10 dark:bg-gray-700">
+	<section class="relative overflow-x-auto  sm:rounded-lg  mb-5 p-3">
 	
-<h2 class=" mt-5 mb-5 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl pb-5">Mes commandes</h2>
+<h2 class="  mb-5 text-3xl font-extrabold text-gray-400 dark:text-white md:text-5xl lg:text-6xl pb-5">Mes commandes</h2>
 
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mb-5">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
@@ -98,21 +99,22 @@
 
 
 </section>
-<section class="border relative overflow-x-auto shadow-md sm:rounded-lg p-3 mt-5 mb-5 m-3">
-	<h2 class=" mt-5 mb-5 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl pb-5">Mes Photos</h2>
+<hr class="w-[700px] h-1 mx-auto my-4 bg-gray-100/50 border-0 rounded md:my-10 dark:bg-gray-700">
+<section class=" relative overflow-x-auto  sm:rounded-lg p-3 mt-5 mb-5 m-3">
+	<h2 class=" mb-5 text-3xl font-extrabold text-gray-400 dark:text-white md:text-5xl lg:text-6xl pb-5">Mes Photos</h2>
 
 
 			<table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
 				<thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"></thead>
 
-			<th scope="col" class="px-6 py-3">
+			<th scope="col" class=" px-6 py-3">
 				Image
 			</th>
-			<th scope="col" class="px-6 py-3">
+			<th scope="col" class="hidden lg:block px-6 py-3">
 				Nom
 			</th>
-			<th scope="col" class="px-6 py-3">
-				Prix
+			<th scope="col" class="hidden lg:block px-6 py-3">
+				Déscription
 			</th>
 			<th scope="col" class="px-6 py-3">
 				Catégorie
@@ -130,13 +132,13 @@
 
 			<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
-				<td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+				<td scope="row" class=" px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
 					<img class="object-cover rounded-full w-32 h-32" src="{{asset(photo.lien)}}"/>
 				</td>
-				<td class="px-6 py-4">
+				<td class="px-6 py-4 hidden lg:block">
 					{{photo.nom}}
 				</td>
-				<td class="px-6 py-4">
+				<td class="px-6 py-4 hidden lg:block">
 					{{photo.description}}
 				</td>
 				<td class="px-6 py-4">
@@ -146,7 +148,7 @@
 					Prix
 				</td>
 				<td class="px-6 py-4">
-					<a href="{{ path('app_dash_edit', {id:photo.id}) }}" class="bg-gradient-to-br from-cyan-500 to-blue-500 hover:from-cyan-500  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
+					<a href="{{ path('app_dash_edit', {id:photo.id}) }}" class="bg-gradient-to-br from-green-600 to-green-200 hover:from-green-600  focus:ring-4 focus:outline-none focus:ring-green-200 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
 						<svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewbox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#1a56db" d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"/></svg>
 					</a>
 					<a href="{{ path('app_dash_delete', {id:photo.id}) }}" class=" bg-gradient-to-br from-pink-500 to-orange-400 hover:from-pink-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
@@ -168,9 +170,9 @@
 {% include'_componant/page.html.twig' %}
 
 </section>
-
-<section class="border relative overflow-x-auto shadow-md sm:rounded-lg p-3 mt-5 mb-5 m-3">
-	<h2 class=" mt-5 mb-5 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl pb-5">Mes Commentaires</h2>
+<hr class="w-[700px] h-1 mx-auto my-4 bg-gray-100/50 border-0 rounded md:my-10 dark:bg-gray-700">
+<section class=" relative overflow-x-auto shadow-md sm:rounded-lg p-3 mt-5 mb-5 m-3">
+	<h2 class=" mb-5 text-3xl font-extrabold text-gray-400 dark:text-white md:text-5xl lg:text-6xl pb-5">Mes Commentaires</h2>
 	{% for commentaire in commentaire %}
 			<table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
 				<thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -192,14 +194,14 @@
 			<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
 				<td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-					{{commentaire.comment}}
+					{{commentaire.comment|raw}}
 				</td>
 				<td class="px-6 py-4">
 					{{commentaire.photo.categorie.nom}}
 				</td>
 
-				<td class="px-6 py-4">
-					<a href="" class="bg-gradient-to-br from-cyan-500 to-blue-500 hover:from-cyan-500  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
+				<td class="px-6 py-4 ">
+					<a href="" class="bg-gradient-to-br from-green-600 to-green-200 hover:from-green-600  focus:ring-4 focus:outline-none focus:ring-green-200 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
 						<svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewbox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#1a56db" d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"/></svg>
 					</a>
 					<a href="" class=" bg-gradient-to-br from-pink-500 to-orange-400 hover:from-pink-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">

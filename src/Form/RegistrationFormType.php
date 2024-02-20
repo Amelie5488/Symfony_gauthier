@@ -20,38 +20,47 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                "attr" => ["placeholder" => "Email", 
-                "class" => "w-[70%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"]
+                "attr" => [
+                    "placeholder" => "Email",
+                    "class" => "w-[70%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-600 dark:focus:border-green-600"
+                ]
             ])
             ->add('nom', TextType::class, [
-                "attr"=>["placeholder"=>"Nom",
-                "class"=>"w-[70%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"]
+                "attr" => [
+                    "placeholder" => "Nom",
+                    "class" => "w-[70%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-600 dark:focus:border-green-600"
+                ]
             ])
             ->add('prenom', TextType::class, [
-                "attr"=>["placeholder"=>"Prénom",
-                "class"=>"w-[70%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"]
+                "attr" => [
+                    "placeholder" => "Prénom",
+                    "class" => "w-[70%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-600 dark:focus:border-green-600"
+                ]
             ])
             ->add('pseudo', TextType::class, [
-                "attr"=>["placeholder"=>"Pseudo",
-                "class"=>"w-[70%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"]
+                "attr" => [
+                    "placeholder" => "Pseudo",
+                    "class" => "w-[70%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-600 dark:focus:border-green-600"
+                ]
             ])
             ->add('agreeTerms', CheckboxType::class, [
-                "attr"=>["class"=>"w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"],
-               
-                                'mapped' => false,
+                "attr" => ["class" => "w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-green-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"],
+                'mapped' => false,
+                'label'=>'Accepter les termes et conditions',
+                'label_attr'=>['class'=>'text-gray-400 me-2'],
                 'constraints' => [
                     new IsTrue([
                         'message' => 'You should agree to our terms.',
-                        
+
                     ]),
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
 
-                                // instead of being set onto the object directly,
+                // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password', "placeholder"=>"Mot de Passe", "class"=>"w-[70%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"],
+                'attr' => ['autocomplete' => 'new-password', "placeholder" => "Mot de Passe", "class" => "w-[70%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-600 dark:focus:border-green-600"],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',
@@ -63,9 +72,7 @@ class RegistrationFormType extends AbstractType
                     //     'max' => 4096,
                     // ]),
                 ],
-            ])
-          
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

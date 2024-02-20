@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 body{
-  background-color: #001212;
+  background-color: #1f1f1f;
 
 }
 
 nav{
-  background-color: #001212;
+  background-color: #181818;
  
 
 }
@@ -19,7 +19,7 @@ border-color: #737F78;
 }
 
 footer{
-  background-color:#001212 ;
+  background-color:#181818 ;
 
 }
 
@@ -47,6 +47,8 @@ footer{
   animation-name: fadeInUp;
   -webkit-animation-name: fadeInUp;
 }
+
+@media screen and (min-width: 1050px) {
 
 @keyframes fadeInUp {
   from {
@@ -78,8 +80,8 @@ footer{
 }
 
 .animatedFadeInUp {
-  opacity: 0
+  opacity: 0;
 }
-
+}
 
 
