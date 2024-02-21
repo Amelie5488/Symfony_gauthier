@@ -7,7 +7,7 @@
 	<section class="">
 		<article class="flex flex-col items-center border border-gray-500 m-3 p-3 rounded-lg">
 			<h2 class=" mb-4 text-4xl font-bold  text-zinc-500">{{image.nom}}</h2>
-			<img class="w-[85%] rounded " src="{{asset(image.lien)}}" alt="product image"/>
+			<img class="w-[85%] rounded " src="{{asset('img/' ~ image.lien)}}" alt="product image"/>
 		</article>
 
 		<section class="flex flex-col lg:flex-row justify-center mb-5 ">

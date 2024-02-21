@@ -9,10 +9,12 @@ use App\Entity\Photo;
 use App\Form\CategorieType;
 use App\Form\PhotoType;
 use App\Form\SearchType;
+use App\Repository\CategorieRepository;
 use App\Repository\CommandeRepository;
 use App\Repository\CommentaireRepository;
 use App\Repository\PhotoRepository;
 use App\Service\AlertServiceInterface;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,6 +35,7 @@ class DashController extends AbstractController
     readonly private PhotoRepository $respository,
     readonly private EntityManagerInterface $entity,
     readonly private CommentaireRepository $commentaireRepository,
+    readonly private CategorieRepository $categorieRepository,
     )
     {
         
@@ -40,11 +43,12 @@ class DashController extends AbstractController
     #[Route('/dash', name: 'app_dash')]
     public function index( Request $request, PaginatorInterface $paginator): Response
     {
-        $commande = $this->entity->getRepository(Commande::class)->findAll();
-        //$commentaire = $entity->getRepository(Commentaire::class)->findAll();
+       $commande = $this->entity->getRepository(Commande::class)->findAll();
+   
        $commentaire = $this->commentaireRepository->findAll();
+       $gallerie= $this->categorieRepository->findAll();
 
-       
+        $text="";
         $photo = new Photo();
         
         $form = $this->createForm(PhotoType::class, $photo);
@@ -67,42 +71,46 @@ class DashController extends AbstractController
 
 
 
-            $directory = "public/img";
+            $directory = "img";
             
             $file = $form['lien']->getData();
             $file->move($directory, $file->getClientOriginalName());
            
-            $photo->setLien($directory . '/' . $file->getClientOriginalName());
+            $photo->setLien($file->getClientOriginalName());
             $photo->setSlug($slugger->slug($form['nom']->getData()));
-            
+           
             $this->entity->persist($photo);
             $this->entity->flush();
             
-            $this->alertService->success("c'est OK c'est bam c'est bim");
-            return $this->redirectToRoute("app_dash");
+            $text= "Photo bien ajoutée";
+            
         }
 
         if ($formCat->isSubmitted() && $formCat->isValid()) {
 
           
-            $directory = "public/img";
+            $directory = "img";
             
             $file = $formCat['image']->getData();
             $file->move($directory, $file->getClientOriginalName());
             
-            $cat->setImage($directory . '/' . $file->getClientOriginalName());
+            $cat->setImage($file->getClientOriginalName());
             $cat->setSlug($slugger->slug($formCat['nom']->getData()));
-            
-            $this->alertService->success("Bien ajouté");
 
             $this->entity->persist($cat);
             $this->entity->flush();
 
-            $this->alertService->success("c'est OK c'est bam c'est bim");
-            return $this->redirectToRoute("app_dash");
+          
 
+            $text= "Catégorie bien ajoutée";
+        
         }
 
+
+        if ($form->isSubmitted() && $form->isValid()|| $formCat->isSubmitted() && $formCat->isValid() ){
+            $this->alertService->success($text);
+            return $this->redirectToRoute("app_dash");
+        }
 
 
 
@@ -111,6 +119,7 @@ class DashController extends AbstractController
             $this->respository->paginationQuery(),
             $request->query->get('page', 1),
             5
+          
         );
 
         //if($search->isSubmitted() && $search->isValid()){
@@ -127,6 +136,7 @@ class DashController extends AbstractController
             'pagination' => $page,
             'commande'=>$commande,
             'commentaire'=>$commentaire,
+            'categorie'=>$gallerie,
        
         ]);
 
@@ -138,10 +148,23 @@ class DashController extends AbstractController
     #[route('/dash/delete/{id}', name: 'app_dash_delete')]
     public function delete(EntityManagerInterface $entity, Request $request, $id)
     {
-        $photo = $entity->getRepository(Photo::class)->find($id);
+        $photo = $entity->getRepository(Photo::class)->find($id);       
         $entity->remove($photo);
         $entity->flush();
+        $this->alertService->success("Photo supprimée");
         return $this->redirectToRoute("app_dash");
+    }
+
+    #[route('/dash/deleteCat{id}', name : 'app_dash_deleteCat')]
+    public function deleteCat(EntityManagerInterface $entity, $id)
+    {
+        $cat = $entity->getRepository(Categorie::class)->find($id);
+        $entity->remove($cat);
+        $entity->flush();
+        $this->alertService->success("Catégorie suprrimée");
+        return $this->redirectToRoute("app_dash");
+
+       
     }
 
     #[route('/dash/edit/{id}', name: 'app_dash_edit')]
@@ -157,15 +180,26 @@ class DashController extends AbstractController
             $directory = "public/img";
             $file = $form['lien']->getData();
             $file->move($directory, $file->getClientOriginalName());
-            $photo->setLien($directory . '/' . $file->getClientOriginalName());
+            $photo->setLien($file->getClientOriginalName());
    }
             $entity->flush();
  
         }
-
+        $this->alertService->success("Photo modifiée");
         return $this->render('dash/edit.html.twig', [
             "form" => $form,
             "photo"=>$photo,
    ] );
         }
+
+    #[route('/dash/deleteComm{id}', name:'app_dash_deleteCom')]
+    public function deleteCom(EntityManagerInterface $entity, $id)
+    {
+        $commentaire = $entity->getRepository(Commentaire::class)->find($id);
+        $entity->remove($commentaire);
+        $entity->flush();
+        $this->alertService->success("Commentaire supprimé");
+        
+        return $this->redirectToRoute("app_dash");
+    }
 }

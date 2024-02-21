@@ -11,7 +11,7 @@
 			<div class="w-full h-full flex flex-col items-center border border-gray-500 rounded-lg shadow lg:flex-row md:justify-between ">
 				<div class="flex flex-col lg:flex-row">
 					<a href="{{ path('app_commentaire', {id:photo.id, slug:photo.slug}) }}">
-						<img class="object-cover rounded-l-lg lg:w-[250px] lg:h-[250px] w-full"  src="{{asset(photo.lien)}}" alt="product image"/>
+						<img class="object-cover rounded-l-lg lg:w-[250px] lg:h-[250px] w-full"  src="{{asset('img/' ~ photo.lien)}}" alt="product image"/>
 					</a>
 					<div class="flex flex-col justify-between p-4 leading-normal ">
 						<a href="{{ path('app_commentaire', {id:photo.id, slug:photo.slug}) }}">
